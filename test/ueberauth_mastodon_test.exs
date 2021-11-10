@@ -1,8 +1,4 @@
 defmodule UeberauthMastodonTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest UeberauthMastodon
-
-  test "greets the world" do
-    assert UeberauthMastodon.hello() == :world
-  end
 end
