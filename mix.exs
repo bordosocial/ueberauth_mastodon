@@ -22,7 +22,7 @@ defmodule UeberauthMastodon.MixProject do
   defp deps do
     [
       {:ueberauth, "~> 0.7.0"},
-      {:oauth2, "~> 1.0 or ~> 2.0"},
+      {:oauth2, "~> 2.0"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:ex_doc, ">= 0.24.2", only: :dev, runtime: false}
     ]
