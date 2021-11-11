@@ -3,22 +3,28 @@ defmodule Ueberauth.Strategy.Mastodon do
   Überauth strategy for Mastodon and Pleroma.
   """
   use Ueberauth.Strategy
+  alias Ueberauth.Strategy.Mastodon
 
   @impl Ueberauth.Strategy
   def handle_request!(conn) do
-    opts = oauth_client_options_from_conn(conn)
     params = conn.params
-    redirect!(conn, Ueberauth.Strategy.Mastodon.OAuth.authorize_url!(params, opts))
-  end
+    config_opts = options(conn)
 
-  defp oauth_client_options_from_conn(conn) do
-    base_options = [redirect_uri: callback_url(conn)]
-    request_options = conn.private[:ueberauth_request_options].options
+    # https://hexdocs.pm/oauth2/OAuth2.Client.html#new/2
+    oauth_opts = [
+      site: Keyword.get(config_opts, :instance, params["instance"]),
+      redirect_uri: Keyword.get(config_opts, :redirect_uri, callback_url(conn)),
+      client_id: Keyword.get(config_opts, :client_id),
+      client_secret: Keyword.get(config_opts, :client_secret)
+    ]
 
-    case {request_options[:client_id], request_options[:client_secret]} do
-      {nil, _} -> base_options
-      {_, nil} -> base_options
-      {id, secret} -> [client_id: id, client_secret: secret] ++ base_options
-    end
+    # https://docs.joinmastodon.org/methods/apps/oauth/
+    oauth_params = [
+      scope: Keyword.get(config_opts, :scope, "read"),
+      force_login: Keyword.get(config_opts, :force_login, false)
+    ]
+
+    oauth_url = Mastodon.OAuth.authorize_url!(oauth_params, oauth_opts)
+    redirect!(conn, oauth_url)
   end
 end

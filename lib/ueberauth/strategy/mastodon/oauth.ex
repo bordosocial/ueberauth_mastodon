@@ -1,19 +1,10 @@
 defmodule Ueberauth.Strategy.Mastodon.OAuth do
   @moduledoc """
   `OAuth2.Strategy` implementation for Mastodon & Pleroma.
-
-  Add `:client_id` and `:client_secret` to your configuration:
-
-  ```elixir
-  config :ueberauth, Ueberauth.Strategy.Mastodon.OAuth,
-    client_id: System.get_env("MASTODON_APP_ID"),
-    client_secret: System.get_env("MASTODON_APP_SECRET")
-  ```
   """
   use OAuth2.Strategy
 
   @defaults [
-    # Maybe we'll add defaults later
     strategy: __MODULE__
   ]
 
@@ -30,13 +21,7 @@ defmodule Ueberauth.Strategy.Mastodon.OAuth do
   """
   @spec client(opts :: Keyword.t()) :: OAuth2.Client.t()
   def client(opts \\ []) do
-    config = Application.get_env(:ueberauth, Ueberauth.Strategy.Mastodon.OAuth, [])
-
-    opts =
-      @defaults
-      |> Keyword.merge(config)
-      |> Keyword.merge(opts)
-
+    opts = Keyword.merge(@defaults, opts)
     json_library = Ueberauth.json_library()
 
     opts

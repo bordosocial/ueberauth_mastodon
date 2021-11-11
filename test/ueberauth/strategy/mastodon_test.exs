@@ -8,7 +8,7 @@ defmodule Ueberauth.Strategy.MastodonTest do
     opts = Ueberauth.init()
 
     response =
-      conn(:get, "/auth/mastodon", [])
+      conn(:get, "/auth/gleasonator", [])
       |> Ueberauth.call(opts)
 
     location = Map.new(response.resp_headers)["location"]
@@ -18,6 +18,6 @@ defmodule Ueberauth.Strategy.MastodonTest do
 
     # ...to the expected URL
     assert location ==
-             "/oauth/authorize?client_id=3WCR-5e3nOg2SJ90W134VLIIwmib2T96qsXWSJAAEUs&redirect_uri=http%3A%2F%2Fwww.example.com%2Fauth%2Fmastodon%2Fcallback&response_type=code"
+             "https://gleasonator.com/oauth/authorize?client_id=3WCR-5e3nOg2SJ90W134VLIIwmib2T96qsXWSJAAEUs&force_login=false&redirect_uri=http%3A%2F%2Fwww.example.com%2Fauth%2Fgleasonator%2Fcallback&response_type=code&scope=read"
   end
 end
