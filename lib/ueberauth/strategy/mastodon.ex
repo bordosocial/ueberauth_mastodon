@@ -3,7 +3,6 @@ defmodule Ueberauth.Strategy.Mastodon do
   Überauth strategy for Mastodon and Pleroma.
   """
   use Ueberauth.Strategy
-  alias Ueberauth.Strategy.Mastodon
 
   @impl Ueberauth.Strategy
   def handle_request!(conn) do
@@ -48,6 +47,6 @@ defmodule Ueberauth.Strategy.Mastodon do
       client_id: Keyword.get(config_opts, :client_id),
       client_secret: Keyword.get(config_opts, :client_secret)
     ]
-    |> Mastodon.OAuth.client()
+    |> UeberauthMastodon.OAuth2.Client.new()
   end
 end

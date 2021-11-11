@@ -1,9 +1,8 @@
-defmodule Ueberauth.Strategy.Mastodon.OAuthTest do
+defmodule UeberauthMastodon.OAuth2.StrategyTest do
   use ExUnit.Case, async: true
-  alias Ueberauth.Strategy.Mastodon
 
   test "OAuth2.Client.authorize_url!/2 builds the expected URL" do
-    client = Mastodon.OAuth.client(site: "https://gleasonator.com")
+    client = UeberauthMastodon.OAuth2.Client.new(site: "https://gleasonator.com")
 
     params = [
       client_id: "a1b2c3",
