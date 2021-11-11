@@ -1,4 +1,4 @@
-defmodule Ueberauth.Strategy.MastodonTest do
+defmodule UeberauthMastodon.StrategyTest do
   use ExUnit.Case, async: true
   use Plug.Test
 

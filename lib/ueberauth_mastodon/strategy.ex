@@ -1,4 +1,4 @@
-defmodule Ueberauth.Strategy.Mastodon do
+defmodule UeberauthMastodon.Strategy do
   @moduledoc """
   Überauth strategy for Mastodon and Pleroma.
   """
