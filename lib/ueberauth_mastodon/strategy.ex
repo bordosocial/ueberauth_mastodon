@@ -37,6 +37,18 @@ defmodule UeberauthMastodon.Strategy do
     end
   end
 
+  @impl Ueberauth.Strategy
+  def extra(%{private: %{mastodon_user: %{} = user, mastodon_token: %{} = token}}) do
+    %Ueberauth.Auth.Extra{
+      raw_info: %{
+        token: token,
+        user: user
+      }
+    }
+  end
+
+  def extra(_conn), do: %Ueberauth.Auth.Extra{}
+
   defp build_client(%Plug.Conn{params: params} = conn) do
     config_opts = options(conn)
     json_library = Ueberauth.json_library()
