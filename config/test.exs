@@ -1,5 +1,7 @@
 import Config
 
+config :tesla, adapter: Tesla.Adapter.Hackney
+
 config :ueberauth, Ueberauth,
   providers: [
     mastodon: {UeberauthMastodon.Strategy, []},
