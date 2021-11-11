@@ -29,24 +29,6 @@ defmodule Ueberauth.Strategy.Mastodon.OAuth do
     |> OAuth2.Client.put_serializer("application/json", json_library)
   end
 
-  @doc """
-  Convenience function for `OAuth2.Client.authorize_url!/2`.
-  """
-  def authorize_url!(params \\ [], opts \\ []) do
-    opts
-    |> client()
-    |> OAuth2.Client.authorize_url!(params)
-  end
-
-  @doc """
-  Convenience function for `OAuth2.Client.get_token!/2`.
-  """
-  def get_token!(params \\ [], opts \\ []) do
-    opts
-    |> client()
-    |> OAuth2.Client.get_token!(params)
-  end
-
   @impl OAuth2.Strategy
   def authorize_url(client, params) do
     OAuth2.Strategy.AuthCode.authorize_url(client, params)
