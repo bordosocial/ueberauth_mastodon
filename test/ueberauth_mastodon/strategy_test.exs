@@ -4,7 +4,7 @@ defmodule UeberauthMastodon.StrategyTest do
 
   # Note: These tests work because of the configuration in config/test.exs
 
-  test "handle_request!/1 redirects to the URL" do
+  test "handle_request!/1 redirects to the expected URL" do
     opts = Ueberauth.init()
 
     response =

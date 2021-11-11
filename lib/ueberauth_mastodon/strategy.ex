@@ -39,14 +39,17 @@ defmodule UeberauthMastodon.Strategy do
 
   defp build_client(%Plug.Conn{params: params} = conn) do
     config_opts = options(conn)
+    json_library = Ueberauth.json_library()
 
     # https://hexdocs.pm/oauth2/OAuth2.Client.html#new/2
     [
+      strategy: UeberauthMastodon.OAuth2.Strategy,
       site: Keyword.get(config_opts, :instance, params["instance"]),
       redirect_uri: Keyword.get(config_opts, :redirect_uri, callback_url(conn)),
       client_id: Keyword.get(config_opts, :client_id),
       client_secret: Keyword.get(config_opts, :client_secret)
     ]
-    |> UeberauthMastodon.OAuth2.Client.new()
+    |> OAuth2.Client.new()
+    |> OAuth2.Client.put_serializer("application/json", json_library)
   end
 end
