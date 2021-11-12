@@ -2,9 +2,9 @@ import Config
 
 config :ueberauth, Ueberauth,
   providers: [
-    mastodon: {UeberauthMastodon.Strategy, []},
+    mastodon: {Ueberauth.Strategy.Mastodon, []},
     gleasonator:
-      {UeberauthMastodon.Strategy,
+      {Ueberauth.Strategy.Mastodon,
        [
          instance: "https://gleasonator.com",
          client_id: "3WCR-5e3nOg2SJ90W134VLIIwmib2T96qsXWSJAAEUs",

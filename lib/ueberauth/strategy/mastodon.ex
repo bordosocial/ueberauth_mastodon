@@ -1,9 +1,9 @@
-defmodule UeberauthMastodon.Strategy do
+defmodule Ueberauth.Strategy.Mastodon do
   @moduledoc """
   Überauth strategy for Mastodon and Pleroma.
   """
   use Ueberauth.Strategy
-  alias UeberauthMastodon.API
+  alias Ueberauth.Strategy.Mastodon.API
 
   @impl Ueberauth.Strategy
   def handle_request!(conn) do

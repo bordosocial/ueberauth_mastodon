@@ -1,4 +1,4 @@
-defmodule UeberauthMastodon.API do
+defmodule Ueberauth.Strategy.Mastodon.API do
   use Tesla
   plug(Tesla.Middleware.JSON)
 
