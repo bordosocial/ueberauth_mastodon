@@ -31,14 +31,14 @@ defmodule Ueberauth.Strategy.Mastodon do
     base_url = Keyword.get(config_opts, :instance, conn.params["instance"])
 
     # https://docs.joinmastodon.org/methods/apps/oauth/
-    token_params = [
+    token_params = %{
       grant_type: "authorization_code",
       client_id: Keyword.get(config_opts, :client_id),
       client_secret: Keyword.get(config_opts, :client_secret),
       redirect_uri: Keyword.get(config_opts, :redirect_uri, callback_url(conn)),
       scope: Keyword.get(config_opts, :scope, "read"),
       code: code
-    ]
+    }
 
     with {_, {:ok, %{status: 200, body: token}}} <-
            {:create_token, API.token_create(base_url, token_params)},
@@ -48,10 +48,12 @@ defmodule Ueberauth.Strategy.Mastodon do
       |> put_private(:mastodon_token, token)
       |> put_private(:mastodon_user, account)
     else
-      {:create_token, _} ->
+      {:create_token, response} ->
+        IO.warn(inspect(response))
         set_errors!(conn, [error("create_token", "Could not obtain an OAuth token.")])
 
-      {:verify_credentials, _} ->
+      {:verify_credentials, response} ->
+        IO.warn(inspect(response))
         set_errors!(conn, [error("account_verify_credentials", "The token did not work.")])
     end
   end
