@@ -11,13 +11,15 @@ defmodule Ueberauth.Strategy.Mastodon do
     base_url = Keyword.get(config_opts, :instance, conn.params["instance"])
 
     # https://docs.joinmastodon.org/methods/apps/oauth/
-    authorize_params = [
-      response_type: "code",
-      client_id: Keyword.get(config_opts, :client_id),
-      redirect_uri: Keyword.get(config_opts, :redirect_uri, callback_url(conn)),
-      scope: Keyword.get(config_opts, :scope, "read"),
-      force_login: Keyword.get(config_opts, :force_login, false)
-    ]
+    authorize_params =
+      [
+        response_type: "code",
+        client_id: Keyword.get(config_opts, :client_id),
+        redirect_uri: Keyword.get(config_opts, :redirect_uri, callback_url(conn)),
+        scope: Keyword.get(config_opts, :scope, "read"),
+        force_login: Keyword.get(config_opts, :force_login, false)
+      ]
+      |> with_state_param(conn)
 
     oauth_url = API.build_authorize_url(base_url, authorize_params)
     redirect!(conn, oauth_url)

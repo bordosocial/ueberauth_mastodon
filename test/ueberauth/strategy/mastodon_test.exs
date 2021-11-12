@@ -17,7 +17,15 @@ defmodule Ueberauth.Strategy.MastodonTest do
     assert response.status == 302
 
     # ...to the expected URL
-    assert location ==
-             "https://gleasonator.com/oauth/authorize?response_type=code&client_id=3WCR-5e3nOg2SJ90W134VLIIwmib2T96qsXWSJAAEUs&redirect_uri=http%3A%2F%2Fwww.example.com%2Fauth%2Fgleasonator%2Fcallback&scope=read&force_login=false"
+    %{host: "gleasonator.com", path: "/oauth/authorize", scheme: "https", query: query} =
+      URI.parse(location)
+
+    q = query |> URI.query_decoder() |> Map.new()
+    assert q["client_id"] == "3WCR-5e3nOg2SJ90W134VLIIwmib2T96qsXWSJAAEUs"
+    assert q["force_login"] == "false"
+    assert q["redirect_uri"] == "http://www.example.com/auth/gleasonator/callback"
+    assert q["response_type"] == "code"
+    assert q["scope"] == "read"
+    assert q["state"]
   end
 end
