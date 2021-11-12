@@ -44,7 +44,7 @@ defmodule Ueberauth.Strategy.Mastodon do
            {:verify_credentials, API.account_verify_credentials(base_url, token)} do
       conn
       |> put_private(:mastodon_token, token)
-      |> put_private(:mastodon_account, account)
+      |> put_private(:mastodon_user, account)
     else
       {:create_token, _} ->
         set_errors!(conn, [error("create_token", "Could not obtain an OAuth token.")])
@@ -55,7 +55,29 @@ defmodule Ueberauth.Strategy.Mastodon do
   end
 
   @impl Ueberauth.Strategy
-  def extra(%{private: %{mastodon_user: %{} = user, mastodon_token: %{} = token}}) do
+  def credentials(%{private: %{mastodon_token: %{} = token}}) do
+    other =
+      Map.drop(token, [
+        "token_type",
+        "access_token",
+        "scope",
+        "expires_in",
+        "refresh_token"
+      ])
+
+    %Ueberauth.Auth.Credentials{
+      token_type: Map.get(token, "token_type", "Bearer"),
+      token: Map.get(token, "access_token"),
+      scopes: Map.get(token, "scope", "") |> String.split(" ", trim: true),
+      expires: Map.get(token, "expires_in") |> is_integer(),
+      expires_at: Map.get(token, "expires_in"),
+      refresh_token: Map.get(token, "refresh_token"),
+      other: other
+    }
+  end
+
+  @impl Ueberauth.Strategy
+  def extra(%{private: %{mastodon_token: %{} = token, mastodon_user: %{} = user}}) do
     %Ueberauth.Auth.Extra{
       raw_info: %{
         token: token,
@@ -64,5 +86,10 @@ defmodule Ueberauth.Strategy.Mastodon do
     }
   end
 
-  def extra(_conn), do: %Ueberauth.Auth.Extra{}
+  @impl Ueberauth.Strategy
+  def handle_cleanup!(conn) do
+    conn
+    |> put_private(:mastodon_token, nil)
+    |> put_private(:mastodon_user, nil)
+  end
 end
