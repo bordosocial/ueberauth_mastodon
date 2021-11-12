@@ -19,7 +19,7 @@ defmodule Ueberauth.Strategy.Mastodon do
       force_login: Keyword.get(config_opts, :force_login, false)
     ]
 
-    oauth_url = API.build_oauth_url(base_url, authorize_params)
+    oauth_url = API.build_authorize_url(base_url, authorize_params)
     redirect!(conn, oauth_url)
   end
 

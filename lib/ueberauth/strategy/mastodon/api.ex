@@ -26,7 +26,7 @@ defmodule Ueberauth.Strategy.Mastodon.API do
     account_verify_credentials(base_url, token)
   end
 
-  def build_oauth_url(base_url, params) do
+  def build_authorize_url(base_url, params) do
     base_url
     |> URI.parse()
     |> Map.merge(%{
