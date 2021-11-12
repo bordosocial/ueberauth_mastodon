@@ -55,6 +55,18 @@ defmodule Ueberauth.Strategy.Mastodon do
   end
 
   @impl Ueberauth.Strategy
+  def uid(%{private: %{mastodon_user: %{} = user}} = conn) do
+    uid_field =
+      conn
+      |> options()
+      |> Keyword.get(:uid_field, "url")
+      |> to_string()
+
+    user
+    |> Map.get(uid_field)
+  end
+
+  @impl Ueberauth.Strategy
   def credentials(%{private: %{mastodon_token: %{} = token}}) do
     other =
       Map.drop(token, [
@@ -73,6 +85,30 @@ defmodule Ueberauth.Strategy.Mastodon do
       expires_at: Map.get(token, "expires_in"),
       refresh_token: Map.get(token, "refresh_token"),
       other: other
+    }
+  end
+
+  @impl Ueberauth.Strategy
+  def info(%{private: %{mastodon_user: %{} = user}}) do
+    email =
+      case user do
+        %{"pleroma" => %{"email" => email}} -> email
+        _ -> nil
+      end
+
+    %Ueberauth.Auth.Info{
+      description: Map.get(user, "note"),
+      image: Map.get(user, "avatar"),
+      name: Map.get(user, "display_name"),
+      nickname: Map.get(user, "acct"),
+      email: email,
+      urls: %{
+        url: Map.get(user, "url"),
+        avatar: Map.get(user, "avatar"),
+        avatar_static: Map.get(user, "avatar_static"),
+        header: Map.get(user, "header"),
+        header_static: Map.get(user, "header_static")
+      }
     }
   end
 
