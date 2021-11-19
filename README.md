@@ -23,7 +23,8 @@ config :ueberauth, Ueberauth,
     mastodon: {Ueberauth.Strategy.Mastodon, [
       # instance: "https://example.tld",
       # client_id: "********",
-      # client_secret: "********"
+      # client_secret: "********",
+      # scope: "read write follow"
     ]},
 
     # This one will be at /auth/gleasonator
@@ -35,7 +36,8 @@ config :ueberauth, Ueberauth,
          # You MUST provide app credentials.
          # Generate your app before getting started.
          client_id: "3WCR-5e3nOg2SJ90W134VLIIwmib2T96qsXWSJAAEUs",
-         client_secret: "r-vCWcOk_7IY202yYMMgEHEVEtd5Gv4tlByZqVChRm0"
+         client_secret: "r-vCWcOk_7IY202yYMMgEHEVEtd5Gv4tlByZqVChRm0",
+         scope: "read write follow"
        ]}
   ]
 ```
