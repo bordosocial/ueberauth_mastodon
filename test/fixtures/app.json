@@ -1,0 +1,9 @@
+{
+  "client_id": "3qMJ_nS7tNO0BrbExHFnYGVrjKidn1X4AxDPZvJ09uU",
+  "client_secret": "pWIQ9TrQXjMtJuq1Ywznf-5YwFWey0_vjq2Tzk8Q6pI",
+  "id": "5357",
+  "name": "Patron",
+  "redirect_uri": "https://patron.gleasonator.com/auth/fediverse/callback",
+  "website": null,
+  "vapid_key": "BLElLQVJVmY_e4F5JoYxI5jXiVOYNsJ9p-amkykc9NcI-jwa9T1Y2GIbDqbY-HqC6ayPkfW4K4o9vgBFKYmkuS4"
+}

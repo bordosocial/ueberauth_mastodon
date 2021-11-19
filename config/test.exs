@@ -1,5 +1,9 @@
 import Config
 
+# Configure Tesla mock adapter
+# https://hexdocs.pm/tesla/Tesla.Mock.html
+config :tesla, adapter: Tesla.Mock
+
 config :ueberauth, Ueberauth,
   providers: [
     mastodon: {Ueberauth.Strategy.Mastodon, []},
