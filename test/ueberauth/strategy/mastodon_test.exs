@@ -4,6 +4,8 @@ defmodule Ueberauth.Strategy.MastodonTest do
 
   alias Ueberauth.Strategy.Mastodon, as: Strategy
 
+  @json_library Ueberauth.json_library()
+
   test "handle_request!/1 redirects to the expected URL" do
     options = %{
       callback_path: "/auth/gleasonator/callback",
@@ -37,8 +39,47 @@ defmodule Ueberauth.Strategy.MastodonTest do
     assert q["scope"] == "read"
   end
 
-  test "handle_callback!/1 passes an %Auth{} struct through the conn" do
-    # TODO
+  describe "handle_callback!/1" do
+    setup do
+      Tesla.Mock.mock(fn
+        %{method: :post, url: "https://gleasonator.com/oauth/token"} ->
+          %Tesla.Env{
+            status: 200,
+            body: File.read!("test/fixtures/token.json") |> @json_library.decode!()
+          }
+
+        %{method: :get, url: "https://gleasonator.com/api/v1/accounts/verify_credentials"} ->
+          %Tesla.Env{
+            status: 200,
+            body: File.read!("test/fixtures/account.json") |> @json_library.decode!()
+          }
+      end)
+
+      :ok
+    end
+
+    test "sets :mastodon_token and :mastodon_user private fields" do
+      options = %{
+        callback_path: "/auth/fediverse/callback",
+        options: [
+          instance: "https://gleasonator.com",
+          client_id: "3qMJ_nS7tNO0BrbExHFnYGVrjKidn1X4AxDPZvJ09uU",
+          client_secret: "pWIQ9TrQXjMtJuq1Ywznf-5YwFWey0_vjq2Tzk8Q6pI"
+        ]
+      }
+
+      response =
+        :get
+        |> conn("/", %{"code" => "2rAXcKT5DFrg4uyUn2xfAJCcKZ6WaajKdOb0mUwh41s"})
+        |> put_private(:ueberauth_request_options, options)
+        |> Strategy.handle_callback!()
+
+      assert response.private.mastodon_token ==
+               File.read!("test/fixtures/token.json") |> @json_library.decode!()
+
+      assert response.private.mastodon_user ==
+               File.read!("test/fixtures/account.json") |> @json_library.decode!()
+    end
   end
 
   test "uid/1 returns the account URL by default" do

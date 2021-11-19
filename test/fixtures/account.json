@@ -1,0 +1,106 @@
+{
+  "acct": "benis911",
+  "avatar": "https://gleasonator.com/images/avi.png",
+  "avatar_static": "https://gleasonator.com/images/avi.png",
+  "bot": false,
+  "created_at": "2021-03-26T20:42:11.000Z",
+  "display_name": "benis911",
+  "emojis": [],
+  "fields": [],
+  "follow_requests_count": 0,
+  "followers_count": 3,
+  "following_count": 1,
+  "fqn": "benis911@gleasonator.com",
+  "header": "https://media.gleasonator.com/fc595bbbcf5aabefecd1c2adfe5b7f5457db59847992881668653a0338ba25bd.jpg",
+  "header_static": "https://media.gleasonator.com/fc595bbbcf5aabefecd1c2adfe5b7f5457db59847992881668653a0338ba25bd.jpg",
+  "id": "A5c5LK7EJTFR0u26Pg",
+  "locked": true,
+  "note": "hello world 2",
+  "pleroma": {
+    "accepts_chat_messages": true,
+    "accepts_email_list": false,
+    "allow_following_move": true,
+    "also_known_as": [
+      "https://gleasonator.com/users/alex",
+      "https://poa.st/users/alex"
+    ],
+    "ap_id": "https://gleasonator.com/users/benis911",
+    "background_image": null,
+    "chat_token": "SFMyNTY.g2gDbQAAABJBNWM1TEs3RUpURlIwdTI2UGduBgBvl2U5fQFiAAFRgA.RbFwYgVZdGvA2dCD4HUv91oJd3E7EUSw4KlPdAvyC-A",
+    "favicon": "https://gleasonator.com/favicon.png",
+    "hide_favorites": true,
+    "hide_followers": true,
+    "hide_followers_count": true,
+    "hide_follows": true,
+    "hide_follows_count": true,
+    "is_admin": false,
+    "is_confirmed": true,
+    "is_moderator": false,
+    "notification_settings": {
+      "block_from_strangers": false,
+      "hide_notification_contents": false
+    },
+    "relationship": {},
+    "settings_store": {
+      "soapbox_fe": {
+        "account_timeline": {
+          "shows": {
+            "pinned": true,
+            "reblog": true
+          }
+        },
+        "chats": {
+          "mainWindow": "minimized",
+          "panes": [],
+          "sound": true
+        },
+        "defaultPrivacy": "unlisted",
+        "explanationBox": true,
+        "frequentlyUsedEmojis": {
+          "blobcat": 1,
+          "blobcataco": 1,
+          "smile": 1
+        },
+        "halloween": false,
+        "locale": "en",
+        "missingDescriptionModal": false,
+        "notifications": {
+          "quickFilter": {
+            "active": "all",
+            "advanced": false
+          },
+          "shows": {
+            "follow_request": true
+          }
+        },
+        "otpEnabled": false,
+        "remote_timeline": {
+          "pinnedHosts": [
+            "freespeechextremist.com",
+            "poa.st"
+          ]
+        },
+        "themeMode": "dark"
+      }
+    },
+    "skip_thread_containment": false,
+    "tags": [],
+    "unread_conversation_count": 0,
+    "unread_notifications_count": 0
+  },
+  "source": {
+    "fields": [],
+    "note": "hello world 2",
+    "pleroma": {
+      "actor_type": "Person",
+      "discoverable": false,
+      "no_rich_text": false,
+      "show_role": true
+    },
+    "privacy": "public",
+    "sensitive": false
+  },
+  "statuses_count": 121,
+  "url": "https://gleasonator.com/users/benis911",
+  "username": "benis911"
+}
