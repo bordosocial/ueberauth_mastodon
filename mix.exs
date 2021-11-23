@@ -52,7 +52,7 @@ defmodule UeberauthMastodon.MixProject do
     [
       {:ueberauth, "~> 0.7.0"},
       {:tesla, "~> 1.4"},
-      {:hackney, "~> 1.18"},
+      {:hackney, "~> 1.18", optional: true},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:ex_doc, ">= 0.24.2", only: :dev, runtime: false}
     ]
