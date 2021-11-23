@@ -119,7 +119,7 @@ Just put a link to `/auth/:provider` somewhere on your website, and it will redi
 You **must** provide a `callback/2` view.
 
 ```elixir
-def callback(%{assigns: %{ueberauth_auth: auth} = conn, _params) do
+def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
   # TODO: Store the auth somewhere
   conn
 end
