@@ -83,10 +83,14 @@ defmodule Ueberauth.Strategy.MastodonTest do
   end
 
   test "uid/1 returns the account URL by default" do
+    options = %{
+      options: [instance: "https://example.com", client_id: "123", client_secret: "456"]
+    }
+
     response =
       :get
       |> conn("/")
-      |> put_private(:ueberauth_request_options, %{options: []})
+      |> put_private(:ueberauth_request_options, options)
       |> put_private(:mastodon_user, %{"url" => "https://gleasonator.com/users/alex"})
       |> Strategy.uid()
 
@@ -94,10 +98,19 @@ defmodule Ueberauth.Strategy.MastodonTest do
   end
 
   test "uid/1 can be configured to return the ID" do
+    options = %{
+      options: [
+        instance: "https://example.com",
+        client_id: "123",
+        client_secret: "456",
+        uid_field: "id"
+      ]
+    }
+
     response =
       :get
       |> conn("/")
-      |> put_private(:ueberauth_request_options, %{options: [uid_field: "id"]})
+      |> put_private(:ueberauth_request_options, options)
       |> put_private(:mastodon_user, %{"id" => "1"})
       |> Strategy.uid()
 

@@ -4,10 +4,11 @@ defmodule Ueberauth.Strategy.Mastodon do
   """
   use Ueberauth.Strategy
   alias Ueberauth.Strategy.Mastodon.API
+  alias Ueberauth.Strategy.Mastodon.OptionsParser
 
   @impl Ueberauth.Strategy
   def handle_request!(conn) do
-    config_opts = options(conn)
+    config_opts = OptionsParser.from_conn!(conn)
     base_url = Keyword.get(config_opts, :instance, conn.params["instance"])
 
     # https://docs.joinmastodon.org/methods/apps/oauth/
@@ -28,7 +29,7 @@ defmodule Ueberauth.Strategy.Mastodon do
 
   @impl Ueberauth.Strategy
   def handle_callback!(%Plug.Conn{params: %{"code" => code}} = conn) do
-    config_opts = options(conn)
+    config_opts = OptionsParser.from_conn!(conn)
     base_url = Keyword.get(config_opts, :instance, conn.params["instance"])
 
     # https://docs.joinmastodon.org/methods/apps/oauth/
@@ -63,7 +64,7 @@ defmodule Ueberauth.Strategy.Mastodon do
   def uid(%{private: %{mastodon_user: %{} = user}} = conn) do
     uid_field =
       conn
-      |> options()
+      |> OptionsParser.from_conn!()
       |> Keyword.get(:uid_field, "url")
       |> to_string()
 
