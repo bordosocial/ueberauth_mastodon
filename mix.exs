@@ -4,7 +4,7 @@ defmodule UeberauthMastodon.MixProject do
   def project do
     [
       app: :ueberauth_mastodon,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 1.11",
       name: "ueberauth_mastodon",
       description: "Überauth strategy for Mastodon and Pleroma.",
@@ -32,7 +32,7 @@ defmodule UeberauthMastodon.MixProject do
         "LICENSE.md"
       ],
       groups_for_modules: groups_for_modules(),
-      source_ref: "v0.1.0"
+      source_ref: "v0.2.0"
     ]
   end
 

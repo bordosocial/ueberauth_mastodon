@@ -241,13 +241,6 @@ def deps do
 end
 ```
 
-## Is it worth it?
-
-This might seem like a lot, but it's often not easier to implement auth on your own.
-
-This guide shows one way to implement it, but it's also possible to implement it with a REST API.
-Once you learn the building blocks it can be very powerful.
-
 # License
 
 ueberauth_mastodon is licensed under the MIT license.
