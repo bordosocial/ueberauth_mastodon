@@ -62,6 +62,33 @@ Just don't leave it blank.
 - `redirect_uri` - Override the redirect URL. By default it goes to `/auth/:provider/callback`
 - `uid_field` - Which field from Mastodon API to map to Überauth. It's set to `"url"` (the ActivityPub ID) by default.
 
+##### Runtime configuration
+
+All configuration options are strings.
+For runtime configuration, it's possible to pass values that will be evaulated to strings:
+
+- **string**, eg `"123456"`
+- **{m, f, a}** tuple, eg `{System, :get_env, ["CLIENT_SECRET"]}`
+- **function**, eg `fn -> System.get_env("CLIENT_SECRET") end`
+
+```elixir
+# Runtime configuration
+config :ueberauth, Ueberauth,
+  providers: [
+    mastodon: {Ueberauth.Strategy.Mastodon, [
+
+      # Just a plain old hardcoded string
+      instance: "https://example.tld",
+
+      # {module, function, args} format
+      client_id: {System, :get_env, "MASTODON_CLIENT_ID"},
+
+      # Anonymous function
+      client_secret: fn -> System.get_env("MASTODON_CLIENT_SECRET") end
+    ]}
+  ]
+```
+
 ### Routes
 
 You'll need to create matching routes in `router.ex`:
