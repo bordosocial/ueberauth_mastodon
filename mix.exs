@@ -51,8 +51,8 @@ defmodule UeberauthMastodon.MixProject do
   defp deps do
     [
       {:ueberauth, "~> 0.7.0"},
-      {:tesla, "~> 1.4"},
       {:hackney, "~> 1.18", optional: true},
+      {:mastodon_client, "~> 0.1"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:ex_doc, ">= 0.24.2", only: :dev, runtime: false}
     ]
