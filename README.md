@@ -233,7 +233,7 @@ Add `ueberauth`, `ueberauth_mastodon`, and a Tesla adapter to your list of depen
 def deps do
   [
     {:ueberauth, "~> 0.7.0"},
-    {:ueberauth_mastodon, "~> 0.1.0"},
+    {:ueberauth_mastodon, "~> 0.2.1"},
 
     # For `Tesla.Adapter.Hackney` to work
     {:hackney, "~> 1.18"}
