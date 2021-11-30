@@ -16,7 +16,7 @@ defmodule Ueberauth.Strategy.Mastodon do
       [
         response_type: "code",
         client_id: Keyword.get(config_opts, :client_id),
-        redirect_uri: Keyword.get(config_opts, :redirect_uri, callback_url(conn)),
+        redirect_uri: Keyword.get(config_opts, :redirect_uri) || callback_url(conn),
         scope: Keyword.get(config_opts, :scope, "read")
         # This param doesn't seem to work right in Pleroma
         # force_login: Keyword.get(config_opts, :force_login, false)
@@ -37,7 +37,7 @@ defmodule Ueberauth.Strategy.Mastodon do
       grant_type: "authorization_code",
       client_id: Keyword.get(config_opts, :client_id),
       client_secret: Keyword.get(config_opts, :client_secret),
-      redirect_uri: Keyword.get(config_opts, :redirect_uri, callback_url(conn)),
+      redirect_uri: Keyword.get(config_opts, :redirect_uri) || callback_url(conn),
       scope: Keyword.get(config_opts, :scope, "read"),
       code: code
     }
