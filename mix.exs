@@ -52,7 +52,8 @@ defmodule UeberauthMastodon.MixProject do
     [
       {:ueberauth, "~> 0.7.0"},
       {:hackney, "~> 1.18", optional: true},
-      {:mastodon_client, "~> 0.1"},
+      {:mastodon_client,
+       git: "https://github.com/bordosocial/mastodon_client.git", branch: "develop"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:ex_doc, ">= 0.24.2", only: :dev, runtime: false}
     ]
